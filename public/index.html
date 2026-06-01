@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>QuickBrief — Paste. Summarize. Tweet.</title>
+  <link rel="stylesheet" href="/styles.css"/>
+</head>
+<body>
+  <header class="topbar">
+    <span class="brand" style="color:var(--accent)">QuickBrief</span>
+  </header>
+  <div class="container">
+    <div class="hero">
+      <h1>Paste any article.</h1>
+      <p>Get a 3-bullet summary &amp; a tweet version — instantly.</p>
+    </div>
+
+    <div id="error-banner" style="display:none" class="banner"></div>
+
+    <div class="card">
+      <form method="POST" action="/summarize">
+        <label for="text">Paste your article or text</label>
+        <textarea id="text" name="text" placeholder="Paste any article, blog post, or long text here…" required></textarea>
+        <div style="margin-top:16px;display:flex;justify-content:flex-end">
+          <button type="submit" class="btn">Summarize</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const err = params.get('error');
+    if (err) {
+      const el = document.getElementById('error-banner');
+      el.textContent = err;
+      el.style.display = 'block';
+    }
+  </script>
+</body>
+</html>
